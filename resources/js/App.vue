@@ -17,7 +17,7 @@
             ST
           </div>
           <div class="flex flex-col">
-            <span class="font-extrabold text-sm sm:text-base tracking-wide text-[#46080E]">SEPTIAN LISTIA TRI CAHYO</span>
+            <span class="font-extrabold text-sm sm:text-base tracking-wide text-[#46080E]">Septian Listia Tri Cahyo</span>
             <span class="text-[10px] sm:text-xs font-semibold tracking-wider text-[#A7865C] uppercase">Portofolio</span>
           </div>
         </a>
@@ -67,9 +67,9 @@
     </header>
 
     <!-- Main Container -->
-    <main class="relative z-10 pt-20 sm:pt-24">
+    <main class="relative z-10 pt-16 sm:pt-20">
       <!-- HERO SECTION -->
-      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-14 flex flex-col-reverse lg:flex-row items-center justify-between gap-8 lg:gap-12 min-h-[75vh]">
+      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-10 lg:pt-6 lg:pb-14 flex flex-col-reverse lg:flex-row items-center justify-between gap-8 lg:gap-12">
         <!-- Hero Text -->
         <div class="flex-1 text-center lg:text-left space-y-5">
           <!-- Availability Badge for HRD -->
@@ -87,11 +87,11 @@
             </h1>
           </div>
 
-          <!-- Roles Pills -->
+          <!-- Roles Pills (Tanpa Icon) -->
           <div class="flex flex-wrap justify-center lg:justify-start gap-2 pt-1">
             <span class="px-4 py-1.5 rounded-lg bg-[#800F19]/10 text-[#800F19] font-semibold text-xs sm:text-sm border border-[#800F19]/20">UI/UX Designer</span>
-            <span class="px-4 py-1.5 rounded-lg bg-[#C1A277]/20 text-[#6E553C] font-semibold text-xs sm:text-sm border border-[#C1A277]/30">Front-End Developer</span>
-            <span class="px-4 py-1.5 rounded-lg bg-white text-[#46080E] font-semibold text-xs sm:text-sm border border-[#E6D7BD] shadow-xs">System Analyst</span>
+            <span class="px-4 py-1.5 rounded-lg bg-[#C1A277]/20 text-[#6E553C] font-semibold text-xs sm:text-sm border border-[#C1A277]/30">System Analyst</span>
+            <span class="px-4 py-1.5 rounded-lg bg-white text-[#46080E] font-semibold text-xs sm:text-sm border border-[#E6D7BD] shadow-xs">Front-End Developer</span>
           </div>
 
           <!-- Summary Bio -->
@@ -135,20 +135,20 @@
           </div>
         </div>
 
-        <!-- Hero Visual / Photo -->
-        <div class="flex-1 flex justify-center items-center relative">
-          <div class="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-[330px] lg:h-[330px]">
-            <!-- Outer Accent Border -->
-            <div class="absolute -inset-2 rounded-full bg-gradient-to-tr from-[#800F19]/25 via-[#C1A277]/20 to-[#FAF6F0] p-1 shadow-xl shadow-[#800F19]/10"></div>
+        <!-- Hero Visual / Photo (Centered image only) -->
+        <div class="flex-1 flex justify-center items-center">
+          <div class="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 flex items-center justify-center">
+            <!-- Subtle backdrop halo -->
+            <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-[#800F19]/20 via-[#C1A277]/25 to-transparent blur-2xl -z-10"></div>
             
-            <!-- Photo Container with optimal scale & positioning -->
-            <div class="relative w-full h-full rounded-full overflow-hidden bg-[#FAF6F0] border-4 border-white shadow-xl group flex items-center justify-center">
+            <!-- Clean Rounded Photo Container -->
+            <div class="w-full h-full rounded-full overflow-hidden border-4 border-white shadow-2xl bg-[#FAF6F0] flex items-center justify-center">
               <img 
                 :src="profileImg || './FotoProfile.png'" 
                 @error="$event.target.src = './FotoProfile.png'"
                 alt="Septian Listia Tri Cahyo" 
-                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                style="object-position: 50% 28%; transform: scale(1.22);"
+                class="w-full h-full object-cover"
+                style="object-position: center 25%;"
               />
             </div>
           </div>
@@ -583,10 +583,10 @@ const projects = [
   {
     id: 1,
     title: 'PILAH',
-    subtitle: 'Textile Waste & Upcycling Ecosystem',
+    subtitle: 'Platform Integrasi Limbah Konveksi untuk Akselerasi Hasil Usaha',
     category: 'uiux',
     gradient: 'from-[#800F19] to-[#A41623]',
-    description: 'Konsep aplikasi mobile yang dirancang untuk menghubungkan konveksi sebagai penghasil limbah tekstil dengan UMKM upcycling sebagai pengguna bahan baku. Membantu menemukan material limbah, memahami kondisi material, bertransaksi, dan membangun kemitraan berkelanjutan.',
+    description: 'PILAH merupakan konsep aplikasi mobile yang dirancang untuk menghubungkan konveksi sebagai penghasil limbah tekstil dengan UMKM upcycling sebagai pengguna bahan baku. Aplikasi ini membantu pengguna menemukan material limbah, memahami kondisi dan informasi material, melakukan transaksi, serta membangun kemitraan untuk memperoleh pasokan yang lebih berkelanjutan.',
     tags: ['Design Thinking', 'User Research', 'Mobile App', 'E-Commerce', 'Usability Testing']
   },
   {
@@ -599,7 +599,7 @@ const projects = [
     tags: ['Figma', 'UI/UX', 'Mobile App', 'Design System', 'User Research']
   },
   {
-    id: 2,
+    id: 3,
     title: 'SIROW',
     subtitle: 'Smart Farming IoT & Water Monitoring',
     category: 'uiux',
