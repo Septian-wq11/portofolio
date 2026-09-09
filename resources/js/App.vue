@@ -144,7 +144,7 @@
             <!-- Photo Container with optimal scale & positioning -->
             <div class="relative w-full h-full rounded-full overflow-hidden bg-[#FAF6F0] border-4 border-white shadow-xl group flex items-center justify-center">
               <img 
-                src="/FotoProfile.png" 
+                :src="profileImg" 
                 alt="Septian Listia Tri Cahyo" 
                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 style="object-position: 50% 28%; transform: scale(1.22);"
@@ -534,6 +534,7 @@
 
 <script setup>
 import { ref, computed } from 'vue';
+import profileImg from '/public/FotoProfile.png?url';
 
 const mobileMenuOpen = ref(false);
 const activeCategory = ref('all');
