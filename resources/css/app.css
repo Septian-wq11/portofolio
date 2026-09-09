@@ -1,0 +1,91 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../views/**/*.blade.php';
+@source '../js/**/*.vue';
+@source '../js/**/*.js';
+
+@theme {
+    --font-sans: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+    
+    /* Maroon & Wine Palette */
+    --color-maroon-950: #2b0408;
+    --color-maroon-900: #46080e;
+    --color-maroon-800: #640d14;
+    --color-maroon-700: #800f19;
+    --color-maroon-600: #a41623;
+    --color-maroon-500: #c9182b;
+    --color-maroon-400: #e03b4d;
+    --color-maroon-300: #f17b88;
+    --color-maroon-200: #fabcc3;
+    --color-maroon-100: #fee2e5;
+    --color-maroon-50: #fff0f2;
+
+    /* Cream & Warm Ivory Palette */
+    --color-cream-50: #fdfbf7;
+    --color-cream-100: #f8f4eb;
+    --color-cream-200: #f1e9d8;
+    --color-cream-300: #e6d7bd;
+    --color-cream-400: #d6be9a;
+    --color-cream-500: #c1a277;
+    --color-cream-600: #a7865c;
+    --color-cream-700: #876a47;
+    --color-cream-800: #6e553c;
+    --color-cream-900: #594633;
+    --color-cream-950: #302419;
+
+    /* Gold / Warm Amber Accent */
+    --color-gold-400: #f2ba49;
+    --color-gold-500: #df9e25;
+    --color-gold-600: #bc7c14;
+}
+
+/* Custom Utilities and Glassmorphism */
+@layer utilities {
+    .bg-grid-pattern {
+        background-image: radial-gradient(rgba(100, 13, 20, 0.08) 1px, transparent 1px);
+        background-size: 24px 24px;
+    }
+    
+    .bg-mesh-maroon {
+        background: radial-gradient(circle at 10% 20%, rgba(128, 15, 25, 0.08) 0%, transparent 40%),
+                    radial-gradient(circle at 90% 80%, rgba(193, 162, 119, 0.15) 0%, transparent 40%),
+                    radial-gradient(circle at 50% 50%, rgba(248, 244, 235, 0.7) 0%, transparent 100%);
+    }
+
+    .glass-card {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(241, 233, 216, 0.9);
+    }
+
+    .glass-maroon {
+        background: rgba(100, 13, 20, 0.92);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f8f4eb;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #800f19;
+    border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #640d14;
+}
