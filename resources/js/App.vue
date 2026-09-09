@@ -79,9 +79,6 @@
           </div>
 
           <div class="space-y-1.5">
-            <h2 class="text-xs sm:text-sm font-semibold tracking-wider text-[#A7865C] uppercase">
-              Hello Recruiter & Visitor, I'm
-            </h2>
             <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#46080E] tracking-tight leading-[1.15]">
               Septian Listia <span class="bg-gradient-to-r from-[#800F19] to-[#DF9E25] bg-clip-text text-transparent">Tri Cahyo</span>
             </h1>
@@ -135,21 +132,57 @@
           </div>
         </div>
 
-        <!-- Hero Visual / Photo (Centered image only) -->
-        <div class="flex-1 flex justify-center items-center">
-          <div class="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 flex items-center justify-center">
-            <!-- Subtle backdrop halo -->
-            <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-[#800F19]/20 via-[#C1A277]/25 to-transparent blur-2xl -z-10"></div>
-            
-            <!-- Clean Rounded Photo Container -->
-            <div class="w-full h-full rounded-full overflow-hidden border-4 border-white shadow-2xl bg-[#FAF6F0] flex items-center justify-center">
-              <img 
-                :src="profileImg || './FotoProfile.png'" 
-                @error="$event.target.src = './FotoProfile.png'"
-                alt="Septian Listia Tri Cahyo" 
-                class="w-full h-full object-cover"
-                style="object-position: center 25%;"
-              />
+        <!-- Hero Visual / Photo (Interactive Photo Container) -->
+        <div class="flex-1 flex justify-center items-center w-full">
+          <div 
+            class="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-84 lg:h-84 mx-auto flex items-center justify-center select-none group perspective-1000"
+            @mousemove="handlePhotoMouseMove"
+            @mouseleave="handlePhotoMouseLeave"
+          >
+            <!-- Animated Ambient Glow Halos -->
+            <div class="absolute -inset-4 rounded-full bg-gradient-to-tr from-[#800F19]/30 via-[#DF9E25]/30 to-[#800F19]/20 blur-2xl group-hover:blur-3xl transition-all duration-700 -z-10 animate-pulse"></div>
+
+            <!-- Rotating Orbital Ring (Subtle decorative tech accent) -->
+            <div class="absolute -inset-3 rounded-full border border-dashed border-[#800F19]/30 animate-spin-slow pointer-events-none group-hover:border-[#800F19]/60 transition-colors"></div>
+            <div class="absolute -inset-6 rounded-full border border-[#C1A277]/25 pointer-events-none group-hover:scale-105 transition-transform duration-500"></div>
+
+            <!-- Interactive 3D Tilt Wrapper -->
+            <div 
+              class="w-full h-full rounded-full p-1.5 bg-gradient-to-tr from-[#800F19] via-[#DF9E25] to-[#800F19] shadow-2xl transition-transform duration-200 ease-out cursor-pointer group-hover:shadow-[0_20px_50px_rgba(128,15,25,0.35)]"
+              :style="photoCardTransform"
+              @click="triggerPhotoSparkle"
+            >
+              <div class="w-full h-full rounded-full overflow-hidden border-4 border-white bg-[#FAF6F0] relative">
+                <img 
+                  :src="profileImg || './FotoProfile.png'" 
+                  @error="$event.target.src = './FotoProfile.png'"
+                  alt="Septian Listia Tri Cahyo" 
+                  class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 group-hover:rotate-1"
+                  style="object-position: center 20%;"
+                />
+
+                <!-- Shimmer Light Sweep on Hover -->
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none"></div>
+              </div>
+            </div>
+
+            <!-- Floating Interactive Floating Badges (Orbiting Pills) -->
+            <!-- Top Right: UI/UX Badge -->
+            <div 
+              class="absolute -top-2 -right-2 sm:top-1 sm:right-0 px-3 py-1.5 rounded-2xl bg-white/95 backdrop-blur-md border border-[#E6D7BD] shadow-lg flex items-center gap-1.5 text-xs font-bold text-[#800F19] transition-all duration-300 group-hover:-translate-y-2 group-hover:scale-110"
+              :style="floatingBadgeTransform(1)"
+            >
+              <span class="text-sm">✨</span>
+              <span>UI/UX & Code</span>
+            </div>
+
+            <!-- Bottom Left: Status Badge -->
+            <div 
+              class="absolute -bottom-2 -left-2 sm:bottom-1 sm:left-0 px-3.5 py-1.5 rounded-2xl bg-[#800F19] text-white shadow-xl shadow-[#800F19]/30 flex items-center gap-2 text-xs font-bold transition-all duration-300 group-hover:translate-y-2 group-hover:scale-110"
+              :style="floatingBadgeTransform(-1)"
+            >
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+              <span>Available for Hire</span>
             </div>
           </div>
         </div>
@@ -282,7 +315,7 @@
           <!-- Project Cards Grid -->
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div 
-              v-for="(project, index) in filteredProjects" 
+              v-for="(project) in filteredProjects" 
               :key="project.id"
               class="glass-card rounded-3xl overflow-hidden border border-[#E6D7BD] hover:border-[#800F19]/40 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col group"
             >
@@ -465,71 +498,6 @@
         <p class="text-[11px]">Crafted with Laravel, Vue 3, & Tailwind CSS • Maroon & Warm Cream Edition</p>
       </div>
     </footer>
-
-    <!-- INTERACTIVE PROJECT CASE MODAL -->
-    <div 
-      v-if="selectedProject" 
-      class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fadeIn"
-      @click.self="selectedProject = null"
-    >
-      <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-[#E6D7BD] flex flex-col">
-        <!-- Modal Header -->
-        <div :class="`bg-gradient-to-r ${selectedProject.gradient} p-6 sm:p-8 text-white relative`">
-          <button 
-            @click="selectedProject = null"
-            class="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/30 hover:bg-black/50 flex items-center justify-center text-white transition-colors"
-          >
-            ✕
-          </button>
-          <span class="px-3 py-1 rounded-full bg-black/30 text-[11px] font-bold uppercase tracking-wider">
-            {{ selectedProject.category }}
-          </span>
-          <h3 class="text-2xl sm:text-3xl font-extrabold mt-3">{{ selectedProject.title }}</h3>
-          <p class="text-sm text-white/80 font-medium">{{ selectedProject.subtitle }}</p>
-        </div>
-
-        <!-- Modal Body -->
-        <div class="p-6 sm:p-8 space-y-6">
-          <div>
-            <h4 class="text-xs font-bold uppercase tracking-wider text-[#800F19] mb-2">Project Overview</h4>
-            <p class="text-sm text-[#594633] leading-relaxed">{{ selectedProject.description }}</p>
-          </div>
-
-          <div v-if="selectedProject.problem">
-            <h4 class="text-xs font-bold uppercase tracking-wider text-[#800F19] mb-2">Problem Statement & User Need</h4>
-            <p class="text-sm text-[#594633] leading-relaxed">{{ selectedProject.problem }}</p>
-          </div>
-
-          <div v-if="selectedProject.solution">
-            <h4 class="text-xs font-bold uppercase tracking-wider text-[#800F19] mb-2">Proposed Solution & Key Features</h4>
-            <p class="text-sm text-[#594633] leading-relaxed">{{ selectedProject.solution }}</p>
-          </div>
-
-          <div>
-            <h4 class="text-xs font-bold uppercase tracking-wider text-[#800F19] mb-2">Technologies & Tools</h4>
-            <div class="flex flex-wrap gap-2">
-              <span 
-                v-for="(t, i) in selectedProject.tags" 
-                :key="i"
-                class="px-3 py-1 rounded-lg bg-[#FAF6F0] text-[#800F19] font-bold text-xs border border-[#E6D7BD]"
-              >
-                {{ t }}
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Modal Footer -->
-        <div class="p-6 bg-[#FAF6F0] border-t border-[#E6D7BD] flex justify-end">
-          <button 
-            @click="selectedProject = null"
-            class="px-6 py-2.5 rounded-xl bg-[#800F19] text-white font-bold text-sm hover:bg-[#640D14] transition-colors"
-          >
-            Close Details
-          </button>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -539,13 +507,57 @@ import profileImg from '/public/FotoProfile.png?url';
 
 const mobileMenuOpen = ref(false);
 const activeCategory = ref('all');
-const selectedProject = ref(null);
+
+// Hero Photo Interactive Mouse Tracking
+const mouseX = ref(0);
+const mouseY = ref(0);
+const isHoveringPhoto = ref(false);
+
+const handlePhotoMouseMove = (e) => {
+  const rect = e.currentTarget.getBoundingClientRect();
+  const x = e.clientX - rect.left - rect.width / 2;
+  const y = e.clientY - rect.top - rect.height / 2;
+  mouseX.value = x / (rect.width / 2); // -1 to 1
+  mouseY.value = y / (rect.height / 2); // -1 to 1
+  isHoveringPhoto.value = true;
+};
+
+const handlePhotoMouseLeave = () => {
+  mouseX.value = 0;
+  mouseY.value = 0;
+  isHoveringPhoto.value = false;
+};
+
+const photoCardTransform = computed(() => {
+  if (!isHoveringPhoto.value) {
+    return 'transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+  }
+  const rotateY = mouseX.value * 14; // max 14deg
+  const rotateX = -mouseY.value * 14; // max 14deg
+  return `transform: perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+});
+
+const floatingBadgeTransform = (factor = 1) => {
+  if (!isHoveringPhoto.value) return {};
+  const moveX = mouseX.value * 15 * factor;
+  const moveY = mouseY.value * 15 * factor;
+  return {
+    transform: `translate3d(${moveX}px, ${moveY}px, 20px)`,
+    transition: 'transform 0.15s ease-out'
+  };
+};
+
+const triggerPhotoSparkle = () => {
+  // subtle bounce effect on click
+  mouseX.value = (Math.random() - 0.5) * 0.8;
+  mouseY.value = (Math.random() - 0.5) * 0.8;
+};
 
 const projectCategories = [
   { id: 'all', label: 'All Works' },
   { id: 'uiux', label: 'UI/UX Design' },
   { id: 'web', label: 'Web Development' },
-  { id: 'mobile', label: 'Mobile & IoT' }
+  { id: 'mobile', label: 'Mobile Development' }
 ];
 
 const experiences = [
@@ -605,52 +617,42 @@ const projects = [
     category: 'uiux',
     gradient: 'from-[#46080E] to-[#800F19]',
     description: 'Perancangan UI/UX aplikasi smart farming berbasis mobile terintegrasi IoT untuk memonitor debit air, kualitas irigasi, dan otomasi penyiraman pertanian.',
-    problem: 'Petani membutuhkan pemantauan parameter air secara efisien tanpa harus memeriksa fisik lahan secara terus-menerus.',
-    solution: 'Dashboard monitoring sensor real-time dengan status peringatan dini dan kontrol irigasi otomatis satu sentuhan.',
     tags: ['Figma', 'UI/UX', 'Mobile App', 'IoT Concept', 'Design System']
   },
   {
-    id: 3,
+    id: 4,
     title: 'FLOMART',
     subtitle: 'Plant & Flora Digital Marketplace',
     category: 'uiux',
     gradient: 'from-[#A7865C] to-[#800F19]',
     description: 'Desain marketplace tanaman hias dengan navigasi pencarian visual berdasarkan jenis perawatan, pencahayaan, dan kemudahan transaksi.',
-    problem: 'Pecinta tanaman sering kesulitan memilih tanaman yang cocok dengan kondisi ruangan dan iklim rumah.',
-    solution: 'Penerapan filter interaktif berdasarkan level perawatan tanaman, integrasi panduan merawat, dan checkout checkout flow yang simpel.',
     tags: ['Figma', 'E-Commerce', 'User Flow', 'Wireframing']
   },
   {
-    id: 4,
+    id: 5,
     title: 'LOUSEL',
     subtitle: 'Mental Health & Emotional Assistant',
     category: 'uiux',
     gradient: 'from-[#640D14] to-[#A41623]',
     description: 'Aplikasi pendamping kesehatan mental yang dilengkapi fitur mood tracking harian, relaksasi terbimbing, dan jurnal emosi.',
-    problem: 'Tingginya stigma dan minimnya sarana pelacakan kondisi emosi harian yang nyaman serta aman bagi anak muda.',
-    solution: 'Visual UI dengan tone menenangkan, fitur jurnal terenkripsi, dan analitik suasana hati mingguan.',
     tags: ['UI/UX', 'Design Thinking', 'Mobile Prototype', 'HealthTech']
   },
   {
-    id: 5,
+    id: 6,
     title: 'Website Marketplace Tanaman',
     subtitle: 'Full-Stack E-Commerce Web System',
     category: 'web',
     gradient: 'from-[#876A47] to-[#46080E]',
     description: 'Pengembangan website jual-beli tanaman lengkap dengan katalog dinamis, manajemen inventaris produk, dan sistem transaksi terintegrasi.',
-    problem: 'Kebutuhan platform web yang cepat, responsif di berbagai ukuran layar, dan mudah dikelola oleh admin.',
-    solution: 'Membangun antarmuka modern menggunakan Tailwind CSS & JavaScript dengan backend modular PHP & database MySQL.',
     tags: ['PHP', 'MySQL', 'Tailwind CSS', 'JavaScript', 'CRUD']
   },
   {
-    id: 6,
+    id: 7,
     title: 'Flutter Marketplace App',
     subtitle: 'Cross-Platform Mobile Application',
     category: 'mobile',
     gradient: 'from-[#800F19] to-[#DF9E25]',
     description: 'Aplikasi Android marketplace dengan arsitektur modular dan reusable components untuk performa transaksi yang cepat.',
-    problem: 'Perlunya aplikasi mobile dengan rendering yang mulus dan konsumsi memori yang ringan.',
-    solution: 'Implementasi widget kustom Flutter yang efisien, navigasi responsif, dan struktur state management yang bersih.',
     tags: ['Flutter', 'Dart', 'Mobile Dev', 'Reusable Components']
   }
 ];
@@ -696,19 +698,5 @@ const filteredProjects = computed(() => {
   if (activeCategory.value === 'all') return projects;
   return projects.filter(p => p.category === activeCategory.value);
 });
-
-const openProjectModal = (project) => {
-  selectedProject.value = project;
-};
 </script>
 
-<style scoped>
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.98); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-.animate-fadeIn {
-  animation: fadeIn 0.2s ease-out forwards;
-}
-</style>
