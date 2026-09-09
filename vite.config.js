@@ -1,14 +1,13 @@
 import { defineConfig } from 'vite';
-import laravel from 'laravel-vite-plugin';
 import tailwindcss from '@tailwindcss/vite';
 import vue from '@vitejs/plugin-vue';
+import { fileURLToPath, URL } from 'node:url';
 
+// https://vitejs.dev/config/
 export default defineConfig({
+    base: './',
+    publicDir: 'public',
     plugins: [
-        laravel({
-            input: ['resources/css/app.css', 'resources/js/app.js'],
-            refresh: true,
-        }),
         tailwindcss(),
         vue({
             template: {
@@ -22,13 +21,11 @@ export default defineConfig({
     resolve: {
         alias: {
             vue: 'vue/dist/vue.esm-bundler.js',
-            '@': '/resources/js',
+            '@': fileURLToPath(new URL('./resources/js', import.meta.url)),
         },
     },
-    server: {
-        watch: {
-            ignored: ['**/storage/framework/views/**'],
-        },
-    },
+    build: {
+        outDir: 'dist',
+        emptyOutDir: true,
+    }
 });
-
