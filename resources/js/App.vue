@@ -118,15 +118,10 @@
               Mahasiswa Sistem Informasi UPN Veteran Jawa Timur berprestasi nasional yang berfokus membangun produk digital yang intuitif, estetik, dan berorientasi solusi bisnis nyata melalui pendekatan <strong class="text-white font-semibold">Design Thinking</strong> dan rekayasa web modern.
             </p>
 
-            <!-- Availability & Location Indicator -->
-            <div class="pt-2 flex flex-wrap justify-center lg:justify-start items-center gap-3 text-[11px] font-semibold tracking-wider text-zinc-400">
-              <div class="flex items-center gap-2">
-                <div class="w-3.5 h-3.5 rounded-full border border-[#d92332] flex items-center justify-center">
-                  <span class="w-1.5 h-1.5 rounded-full bg-[#d92332] animate-pulse"></span>
-                </div>
-                <span class="uppercase tracking-widest text-zinc-300">AVAILABLE FOR HIRE</span>
-              </div>
-              <span class="text-zinc-600">•</span>
+            <!-- Availability & Location Indicator (Clean editorial style without AI-slop status dot) -->
+            <div class="pt-2 flex flex-wrap justify-center lg:justify-start items-center gap-2.5 text-[11px] font-semibold tracking-wider text-zinc-400">
+              <span class="uppercase tracking-widest text-zinc-300">AVAILABLE FOR HIRE</span>
+              <span class="text-zinc-600">/</span>
               <span class="text-zinc-400">SURABAYA, ID</span>
             </div>
           </div>
@@ -312,7 +307,7 @@
         <!-- Horizontal Scroll Navigation Hint / Mobile Arrows -->
         <div class="flex items-center justify-between pt-3 text-[10px] font-mono text-zinc-500 select-none">
           <div class="flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-[#d92332] animate-pulse"></span>
+            <span class="text-[#d92332] font-bold">→</span>
             <span>GESER / SCROLL HORIZONTAL UNTUK MELIHAT 7 PROYEK</span>
           </div>
           <!-- Mobile Prev/Next -->
@@ -365,22 +360,22 @@
                       </p>
                     </div>
                     <span class="text-[11px] font-mono text-zinc-500 whitespace-nowrap">
-                      2022 - Present
+                      2024 - Present
                     </span>
                   </div>
 
-                  <!-- Education 2: UI/UX Certification -->
+                  <!-- Item 2: UI/UX Designer (Freelance) -->
                   <div class="flex justify-between items-start gap-2 pt-2 border-t border-zinc-900">
                     <div>
                       <h4 class="text-xs sm:text-[13px] font-bold text-zinc-100">
-                        UI/UX Design Certification
+                        UI/UX Designer (Freelance)
                       </h4>
                       <p class="text-[11px] text-zinc-400">
-                        Google Career Certificates / ISCOM
+                        Independent / Project-Based
                       </p>
                     </div>
                     <span class="text-[11px] font-mono text-zinc-500 whitespace-nowrap">
-                      2023 - 2024
+                      2025 – Present
                     </span>
                   </div>
                 </div>
@@ -550,49 +545,89 @@
           <div 
             v-for="(exp, eIdx) in experiences" 
             :key="eIdx"
+            @click="openExperienceModal(exp)"
             :class="[
-              'shrink-0 w-[85vw] sm:w-[380px] md:w-[420px] snap-start bg-[#111115] border p-6 rounded-xs transition-all space-y-3.5 flex flex-col justify-between shadow-sm',
+              'shrink-0 w-[85vw] sm:w-[380px] md:w-[420px] snap-start bg-[#111115] border rounded-xs transition-all duration-300 flex flex-col justify-between overflow-hidden group shadow-sm hover:shadow-[0_12px_30px_rgba(217,35,50,0.12)] cursor-pointer',
               exp.featured ? 'border-[#d92332]/60 shadow-[0_4px_25px_rgba(217,35,50,0.15)]' : 'border-zinc-800/80 hover:border-[#d92332]/50'
             ]"
           >
-            <div class="space-y-3">
-              <div class="flex flex-wrap justify-between items-start gap-2">
-                <div>
-                  <div class="flex items-center gap-2">
-                    <h3 class="text-sm sm:text-base font-bold text-white uppercase tracking-wide">{{ exp.role }}</h3>
-                    <span v-if="exp.featured" class="px-2 py-0.5 rounded-xs bg-[#d92332]/20 border border-[#d92332]/50 text-[9px] font-mono text-[#d92332] uppercase tracking-wider font-semibold">
-                      RECOMMENDED
-                    </span>
+            <!-- Top Experience Overview / Documentation Photo -->
+            <div class="relative w-full aspect-[16/10] bg-[#0c0c0f] border-b border-zinc-800/80 overflow-hidden select-none">
+              <template v-if="exp.image">
+                <img 
+                  :src="exp.image" 
+                  :alt="exp.role" 
+                  class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 filter brightness-95 group-hover:brightness-100" 
+                  loading="lazy"
+                />
+                <!-- Subtle Gradient Vignette -->
+                <div class="absolute inset-0 bg-gradient-to-t from-[#111115] via-transparent to-black/30 pointer-events-none"></div>
+
+                <!-- Hover Overlay Badge -->
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/50 backdrop-blur-xs">
+                  <div class="px-3.5 py-1.5 rounded-xs bg-[#d92332] text-white text-[10px] font-mono uppercase tracking-wider font-bold shadow-lg flex items-center gap-1.5">
+                    <ExternalLink class="w-3.5 h-3.5" />
+                    <span>PREVIEW DOKUMENTASI</span>
                   </div>
-                  <div class="text-xs font-semibold text-[#d92332] mt-0.5">{{ exp.company }}</div>
                 </div>
-                <span class="px-2 py-0.5 rounded-xs bg-[#18181f] border border-zinc-800 text-[10px] font-mono text-zinc-400 whitespace-nowrap">
-                  {{ exp.period }}
+              </template>
+
+              <!-- Top Left: Number Tag & Recommended Badge -->
+              <div class="absolute top-3 left-3 flex items-center gap-2">
+                <div class="px-2 py-0.5 rounded-xs bg-black/80 backdrop-blur-md border border-zinc-800 text-[10px] font-mono font-bold text-[#d92332]">
+                  0{{ eIdx + 1 }}
+                </div>
+                <span v-if="exp.featured" class="px-2 py-0.5 rounded-xs bg-[#d92332] text-white text-[9px] font-mono uppercase tracking-wider font-bold shadow-md">
+                  RECOMMENDED
                 </span>
               </div>
 
-              <!-- Bullet points if available -->
-              <ul v-if="exp.points && exp.points.length" class="space-y-1.5 text-xs text-zinc-300 list-none pl-0">
-                <li v-for="(pt, pIdx) in exp.points" :key="pIdx" class="flex items-start gap-2">
-                  <span class="text-[#d92332] font-bold leading-none mt-1">✦</span>
-                  <span class="leading-relaxed">{{ pt }}</span>
-                </li>
-              </ul>
-
-              <!-- Paragraph description fallback -->
-              <p v-else-if="exp.description" class="text-xs text-zinc-400 leading-relaxed">
-                {{ exp.description }}
-              </p>
+              <!-- Top Right: Period Tag -->
+              <div class="absolute top-3 right-3 px-2 py-0.5 rounded-xs bg-black/80 backdrop-blur-md border border-zinc-800 text-[10px] font-mono text-zinc-300">
+                {{ exp.period }}
+              </div>
             </div>
 
-            <div class="flex flex-wrap gap-1.5 pt-2 border-t border-zinc-900">
-              <span 
-                v-for="(tag, tIdx) in exp.tags" 
-                :key="tIdx"
-                class="px-2 py-0.5 bg-zinc-900 border border-zinc-800 text-[9px] font-mono text-zinc-400 rounded-xs"
-              >
-                {{ tag }}
-              </span>
+            <!-- Card Body -->
+            <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
+              <div class="space-y-3">
+                <div>
+                  <h3 class="text-sm sm:text-base font-bold text-white uppercase tracking-wide group-hover:text-[#d92332] transition-colors">
+                    {{ exp.role }}
+                  </h3>
+                  <div class="text-xs font-semibold text-[#d92332] mt-0.5">
+                    {{ exp.company }}
+                  </div>
+                  <div v-if="exp.project" class="text-[11px] font-mono text-zinc-300 mt-1 line-clamp-1">
+                    Project: <span class="text-zinc-100 font-semibold">{{ exp.project }}</span>
+                  </div>
+                </div>
+
+                <!-- Bullet points if available -->
+                <ul v-if="exp.points && exp.points.length" class="space-y-1.5 text-xs text-zinc-300 list-none pl-0">
+                  <li v-for="(pt, pIdx) in exp.points" :key="pIdx" class="flex items-start gap-2">
+                    <span class="text-[#d92332] font-bold leading-none mt-1">✦</span>
+                    <span class="leading-relaxed">{{ pt }}</span>
+                  </li>
+                </ul>
+
+                <!-- Paragraph description fallback -->
+                <p v-else-if="exp.description" class="text-xs text-zinc-400 leading-relaxed">
+                  {{ exp.description }}
+                </p>
+              </div>
+
+              <div class="pt-2 border-t border-zinc-900">
+                <div class="flex flex-wrap gap-1.5">
+                  <span 
+                    v-for="(tag, tIdx) in exp.tags" 
+                    :key="tIdx"
+                    class="px-2 py-0.5 bg-zinc-900 border border-zinc-800 text-[9px] font-mono text-zinc-400 rounded-xs"
+                  >
+                    {{ tag }}
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -600,7 +635,7 @@
         <!-- Horizontal Scroll Navigation Hint / Mobile Arrows -->
         <div class="flex items-center justify-between pt-3 text-[10px] font-mono text-zinc-500 select-none">
           <div class="flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-[#d92332] animate-pulse"></span>
+            <span class="text-[#d92332] font-bold">→</span>
             <span>GESER / SCROLL HORIZONTAL UNTUK MELIHAT 5 PENGALAMAN</span>
           </div>
           <!-- Mobile Prev/Next -->
@@ -660,29 +695,70 @@
           <div 
             v-for="(achieve, aIdx) in achievements" 
             :key="aIdx"
-            class="shrink-0 w-[85vw] sm:w-[320px] md:w-[360px] snap-start bg-[#111115] border border-zinc-800 hover:border-[#d92332]/60 p-6 rounded-xs transition-all flex flex-col justify-between space-y-4 shadow-sm"
+            class="shrink-0 w-[85vw] sm:w-[340px] md:w-[380px] snap-start bg-[#111115] border border-zinc-800 hover:border-[#d92332]/60 rounded-xs transition-all duration-300 flex flex-col justify-between overflow-hidden group shadow-sm hover:shadow-[0_12px_30px_rgba(217,35,50,0.12)] cursor-pointer"
+            @click="openCertificateModal(achieve)"
           >
-            <div class="space-y-2.5">
-              <div class="flex items-center justify-between">
-                <span class="font-display font-bold text-2xl text-[#d92332]">0{{ aIdx + 1 }}</span>
-                <span class="px-2 py-0.5 rounded-xs bg-zinc-900 border border-zinc-800 text-[10px] font-mono text-[#d92332]">
-                  {{ achieve.year }}
-                </span>
+            <!-- Top Certificate Overview / Thumbnail Frame -->
+            <div class="relative w-full aspect-[16/10] bg-[#0c0c0f] border-b border-zinc-800/80 overflow-hidden select-none">
+              <!-- If Image Exists: Certificate Thumbnail -->
+              <template v-if="achieve.image">
+                <img 
+                  :src="achieve.image" 
+                  :alt="achieve.title" 
+                  class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 filter brightness-95 group-hover:brightness-100" 
+                  loading="lazy"
+                />
+                <!-- Subtle Gradient Vignette -->
+                <div class="absolute inset-0 bg-gradient-to-t from-[#111115] via-transparent to-black/30 pointer-events-none"></div>
+                
+                <!-- Hover Overlay Badge -->
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/50 backdrop-blur-xs">
+                  <div class="px-3.5 py-1.5 rounded-xs bg-[#d92332] text-white text-[10px] font-mono uppercase tracking-wider font-bold shadow-lg flex items-center gap-1.5">
+                    <ExternalLink class="w-3.5 h-3.5" />
+                    <span>PREVIEW SERTIFIKAT</span>
+                  </div>
+                </div>
+              </template>
+
+              <!-- If No Image: Sleek Minimalist Typography Placeholder -->
+              <template v-else>
+                <div class="w-full h-full flex flex-col items-center justify-center p-6 text-center space-y-2 bg-[radial-gradient(circle_at_center,rgba(217,35,50,0.08)_0%,transparent_70%)]">
+                  <Award class="w-9 h-9 text-zinc-600 group-hover:text-[#d92332] transition-colors" />
+                  <span class="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">OFFICIAL COMPETITION FINALIST</span>
+                </div>
+              </template>
+
+              <!-- Floating Number Tag -->
+              <div class="absolute top-3 left-3 px-2 py-0.5 rounded-xs bg-black/80 backdrop-blur-md border border-zinc-800 text-[10px] font-mono font-bold text-[#d92332]">
+                0{{ aIdx + 1 }}
               </div>
-              <h3 class="text-sm sm:text-base font-bold text-white uppercase tracking-wide">
-                {{ achieve.title }}
-              </h3>
-              <div class="text-[11px] font-mono text-zinc-400 uppercase tracking-wider">
-                {{ achieve.event }}
+
+              <!-- Floating Year Tag -->
+              <div class="absolute top-3 right-3 px-2 py-0.5 rounded-xs bg-black/80 backdrop-blur-md border border-zinc-800 text-[10px] font-mono text-zinc-300">
+                {{ achieve.year }}
               </div>
-              <p class="text-xs text-zinc-400 leading-relaxed">
-                {{ achieve.description }}
-              </p>
             </div>
 
-            <div class="pt-3 border-t border-zinc-900 flex items-center gap-2 text-[10px] font-mono text-[#d92332] uppercase">
-              <span class="w-1.5 h-1.5 rounded-full bg-[#d92332]"></span>
-              <span>VERIFIED COMPETITION AWARD</span>
+            <!-- Card Content Body -->
+            <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
+              <div class="space-y-2">
+                <div class="text-[10px] font-mono text-[#d92332] uppercase tracking-wider font-semibold">
+                  {{ achieve.event }}
+                </div>
+                <h3 class="text-sm sm:text-base font-bold text-white uppercase tracking-wide group-hover:text-[#d92332] transition-colors line-clamp-1">
+                  {{ achieve.title }}
+                </h3>
+                <div v-if="achieve.team" class="text-[11px] font-mono text-zinc-400">
+                  {{ achieve.team }} <span v-if="achieve.organizer" class="text-zinc-600">/</span> {{ achieve.organizer }}
+                </div>
+                <p class="text-xs text-zinc-400 leading-relaxed line-clamp-3">
+                  {{ achieve.description }}
+                </p>
+              </div>
+
+              <div class="pt-3 border-t border-zinc-900 flex items-center gap-2 text-[10px] font-mono text-[#d92332] uppercase tracking-wider">
+                <span>VERIFIED COMPETITION AWARD</span>
+              </div>
             </div>
           </div>
         </div>
@@ -690,7 +766,7 @@
         <!-- Horizontal Scroll Navigation Hint / Mobile Arrows -->
         <div class="flex items-center justify-between pt-3 text-[10px] font-mono text-zinc-500 select-none">
           <div class="flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-[#d92332] animate-pulse"></span>
+            <span class="text-[#d92332] font-bold">→</span>
             <span>GESER / SCROLL HORIZONTAL UNTUK MELIHAT 5 PRESTASI</span>
           </div>
           <!-- Mobile Prev/Next -->
@@ -848,7 +924,7 @@
           © 2026 SEPTIAN LISTIA TRI CAHYO. ALL RIGHTS RESERVED.
         </div>
         <div class="text-[#d92332] font-semibold tracking-wider">
-          EDITORIAL REDESIGN • V2.0
+          EDITORIAL REDESIGN / V2.0
         </div>
       </footer>
 
@@ -909,6 +985,151 @@
       </div>
     </div>
 
+    <!-- CERTIFICATE OVERVIEW MODAL (LIGHTBOX) -->
+    <div 
+      v-if="activeCertificateModal" 
+      class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md transition-all"
+      @click.self="activeCertificateModal = null"
+    >
+      <div class="bg-[#121216] border border-zinc-800 max-w-3xl w-full p-5 sm:p-6 rounded-xs shadow-2xl relative space-y-4 select-none">
+        
+        <!-- Header -->
+        <div class="flex items-center justify-between pb-3 border-b border-zinc-800">
+          <div>
+            <div class="text-[10px] font-mono text-[#d92332] uppercase tracking-wider font-semibold">
+              {{ activeCertificateModal.event }} / {{ activeCertificateModal.year }}
+            </div>
+            <h3 class="text-base sm:text-lg font-bold text-white uppercase tracking-wide">
+              {{ activeCertificateModal.title }}
+            </h3>
+            <div v-if="activeCertificateModal.team" class="text-[11px] font-mono text-zinc-400">
+              {{ activeCertificateModal.team }} <span v-if="activeCertificateModal.organizer" class="text-zinc-600">/</span> {{ activeCertificateModal.organizer }}
+            </div>
+          </div>
+          <button 
+            @click="activeCertificateModal = null" 
+            class="w-8 h-8 rounded-full border border-zinc-800 text-zinc-400 hover:text-white hover:border-[#d92332] flex items-center justify-center transition-colors cursor-pointer"
+            aria-label="Close"
+          >
+            ✕
+          </button>
+        </div>
+
+        <!-- Certificate Image Container -->
+        <div class="relative w-full aspect-[16/11] max-h-[60vh] bg-black/70 rounded-xs overflow-hidden border border-zinc-800/80 flex items-center justify-center">
+          <img 
+            :src="activeCertificateModal.image" 
+            :alt="activeCertificateModal.title"
+            class="w-full h-full object-contain"
+          />
+        </div>
+
+        <!-- Footer -->
+        <div class="pt-3 border-t border-zinc-800/80 flex flex-wrap items-center justify-between gap-3">
+          <div class="text-[10px] font-mono text-zinc-400 flex items-center gap-1.5">
+            <span class="text-[#d92332] font-bold">✓</span>
+            <span>SERTIFIKAT RESMI & TERVERIFIKASI</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <a 
+              :href="activeCertificateModal.image" 
+              target="_blank"
+              class="px-3.5 py-1.5 rounded-xs border border-zinc-700 bg-zinc-900 hover:bg-zinc-800 text-zinc-200 text-xs font-mono uppercase tracking-wider transition-colors inline-flex items-center gap-1.5"
+            >
+              <ExternalLink class="w-3.5 h-3.5" />
+              <span>Buka Resolusi Penuh</span>
+            </a>
+            <button 
+              @click="activeCertificateModal = null" 
+              class="px-4 py-1.5 bg-[#d92332] hover:bg-[#b31925] text-white text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer rounded-xs"
+            >
+              Tutup
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXPERIENCE DOCUMENTATION MODAL (LIGHTBOX) -->
+    <div 
+      v-if="activeExperienceModal" 
+      class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md transition-all"
+      @click.self="activeExperienceModal = null"
+    >
+      <div class="bg-[#121216] border border-zinc-800 max-w-3xl w-full p-5 sm:p-6 rounded-xs shadow-2xl relative space-y-4 select-none">
+        
+        <!-- Header -->
+        <div class="flex items-center justify-between pb-3 border-b border-zinc-800">
+          <div>
+            <div class="text-[10px] font-mono text-[#d92332] uppercase tracking-wider font-semibold">
+              {{ activeExperienceModal.company }} / {{ activeExperienceModal.period }}
+            </div>
+            <h3 class="text-base sm:text-lg font-bold text-white uppercase tracking-wide">
+              {{ activeExperienceModal.role }}
+            </h3>
+          </div>
+          <button 
+            @click="activeExperienceModal = null" 
+            class="w-8 h-8 rounded-full border border-zinc-800 text-zinc-400 hover:text-white hover:border-[#d92332] flex items-center justify-center transition-colors cursor-pointer"
+            aria-label="Close"
+          >
+            ✕
+          </button>
+        </div>
+
+        <!-- Documentation Image Container -->
+        <div class="relative w-full aspect-[16/10] max-h-[58vh] bg-black/70 rounded-xs overflow-hidden border border-zinc-800/80 flex items-center justify-center">
+          <img 
+            :src="activeExperienceModal.image" 
+            :alt="activeExperienceModal.role"
+            class="w-full h-full object-contain"
+          />
+        </div>
+
+        <!-- Description or Bullet points in Modal -->
+        <div class="max-h-[20vh] overflow-y-auto space-y-2 pr-1">
+          <ul v-if="activeExperienceModal.points && activeExperienceModal.points.length" class="space-y-1.5 text-xs text-zinc-300 list-none pl-0">
+            <li v-for="(pt, pIdx) in activeExperienceModal.points" :key="pIdx" class="flex items-start gap-2">
+              <span class="text-[#d92332] font-bold leading-none mt-1">✦</span>
+              <span class="leading-relaxed">{{ pt }}</span>
+            </li>
+          </ul>
+          <p v-else class="text-xs text-zinc-300 leading-relaxed">
+            {{ activeExperienceModal.description }}
+          </p>
+        </div>
+
+        <!-- Footer -->
+        <div class="pt-3 border-t border-zinc-800/80 flex flex-wrap items-center justify-between gap-3">
+          <div class="flex flex-wrap gap-1">
+            <span 
+              v-for="(tag, tIdx) in activeExperienceModal.tags" 
+              :key="tIdx"
+              class="px-2 py-0.5 bg-zinc-900 border border-zinc-800 text-[9px] font-mono text-zinc-400 rounded-xs"
+            >
+              {{ tag }}
+            </span>
+          </div>
+          <div class="flex items-center gap-2">
+            <a 
+              :href="activeExperienceModal.image" 
+              target="_blank"
+              class="px-3.5 py-1.5 rounded-xs border border-zinc-700 bg-zinc-900 hover:bg-zinc-800 text-zinc-200 text-xs font-mono uppercase tracking-wider transition-colors inline-flex items-center gap-1.5"
+            >
+              <ExternalLink class="w-3.5 h-3.5" />
+              <span>Buka Resolusi Penuh</span>
+            </a>
+            <button 
+              @click="activeExperienceModal = null" 
+              class="px-4 py-1.5 bg-[#d92332] hover:bg-[#b31925] text-white text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer rounded-xs"
+            >
+              Tutup
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -927,10 +1148,22 @@ import {
   Mail, 
   Globe, 
   Phone, 
-  MapPin 
+  MapPin,
+  Award,
+  ExternalLink
 } from 'lucide-vue-next';
 
 import profileImg from '/public/FotoProfile.png?url';
+import certTechno from '/public/certificates/grandfinalis-technotainment.jpg?url';
+import certHackfest from '/public/certificates/juara3-hackfest.jpg?url';
+import certIsofest from '/public/certificates/juara1-isofest.jpg?url';
+
+import expWakilHr from '/public/experience/wakil-hr-vrt.jpg?url';
+import expPemateriBp from '/public/experience/pemateri-bp.jpg?url';
+import expMentorIscom from '/public/experience/mentor-iscom.jpg?url';
+import expFreelanceUiux from '/public/experience/freelance-uiux.jpg?url';
+import expFreelanceHonda from '/public/experience/freelance-honda.jpg?url';
+import expInternDiskominfo from '/public/experience/intern-diskominfo.jpg?url';
 
 // Mobile menu toggle state
 const mobileMenuOpen = ref(false);
@@ -986,6 +1219,24 @@ const activeModalProject = ref(null);
 
 const openProjectModal = (proj) => {
   activeModalProject.value = proj;
+};
+
+// Active certificate for modal lightbox preview
+const activeCertificateModal = ref(null);
+
+const openCertificateModal = (achieve) => {
+  if (achieve.image) {
+    activeCertificateModal.value = achieve;
+  }
+};
+
+// Active experience for modal lightbox preview
+const activeExperienceModal = ref(null);
+
+const openExperienceModal = (exp) => {
+  if (exp.image) {
+    activeExperienceModal.value = exp;
+  }
 };
 
 // All Original Skills
@@ -1085,13 +1336,14 @@ const filteredProjects = computed(() => {
   return projects.filter(p => p.category === activeCategory.value);
 });
 
-// All Updated Experiences
+// All Updated Experiences with Documentation Images
 const experiences = [
   {
     role: 'UI/UX Designer (Freelance)',
     company: 'Independent & Client Projects',
     period: 'Freelance / On-Demand',
     featured: true,
+    image: expFreelanceUiux,
     points: [
       'Merancang desain antarmuka (UI) dan pengalaman pengguna (UX) untuk kebutuhan aplikasi atau website.',
       'Membuat user flow, wireframe, dan prototype menggunakan Figma.',
@@ -1101,9 +1353,25 @@ const experiences = [
     tags: ['UI/UX Design', 'Figma', 'Design Thinking', 'User Flow', 'Wireframing', 'Prototyping', 'Client Collaboration']
   },
   {
+    role: 'Full Stack Dev & QA Intern',
+    company: 'Dinas Komunikasi dan Informatika Provinsi Jawa Timur',
+    project: 'Majadigi Checker & Quality Assurance Sistem APPS',
+    period: 'Government Internship',
+    image: expInternDiskominfo,
+    points: [
+      'Berkontribusi dalam perancangan dan pengembangan sistem Majadigi Checker untuk mendukung proses monitoring dan evaluasi kualitas layanan digital.',
+      'Mengembangkan fitur sistem menggunakan Laravel, Vue.js, dan PostgreSQL.',
+      'Melakukan pengujian fungsional (Functional Testing) dan User Acceptance Testing (UAT) pada Sistem APPS.',
+      'Mengidentifikasi, mendokumentasikan, dan melaporkan bug serta memberikan rekomendasi perbaikan sistem.',
+      'Berkolaborasi dalam proses analisis kebutuhan, implementasi, dan evaluasi sistem.'
+    ],
+    tags: ['Laravel', 'Vue.js', 'PostgreSQL', 'Quality Assurance', 'UAT', 'Functional Testing', 'Full Stack', 'Diskominfo Jatim']
+  },
+  {
     role: 'Admin Sales Support (Freelance)',
-    company: 'PT Prisma Cemerlang Motors',
+    company: 'PT Prisma Cemerlang Motors (Honda)',
     period: 'Freelance / On-Demand',
+    image: expFreelanceHonda,
     description: 'Bertanggung jawab dalam pengelolaan database transaksi penjualan, pengarsipan dokumen digital administrasi perusahaan, serta support operasional data bisnis yang cepat dan akurat.',
     tags: ['Data Management', 'Administration', 'Spreadsheet', 'Workflow Analysis']
   },
@@ -1111,6 +1379,7 @@ const experiences = [
     role: 'Wakil Kepala Departemen HR',
     company: 'Veteran Robotics Team',
     period: 'Organizational Leadership',
+    image: expWakilHr,
     description: 'Memimpin koordinasi tim, mentoring anggota baru, evaluasi kinerja personil, serta perancangan program regenerasi dan recruitment SDM di bidang teknologi robotika.',
     tags: ['HR Management', 'Team Leadership', 'Mentoring', 'Talent Development']
   },
@@ -1118,6 +1387,7 @@ const experiences = [
     role: 'Mentor UI/UX Design',
     company: 'ISCOM (Information System Community)',
     period: 'Mentorship',
+    image: expMentorIscom,
     description: 'Membimbing mahasiswa dan anggota komunitas dalam fundamental UI/UX, Design Thinking, wireframing, interactive prototyping menggunakan Figma, serta implementasi prinsip usability.',
     tags: ['Figma', 'UI/UX Mentoring', 'Design Thinking', 'Usability Testing']
   },
@@ -1125,41 +1395,57 @@ const experiences = [
     role: 'Pemateri Bahasa Pemrograman',
     company: 'Akademik Kampus',
     period: 'Lecturing & Workshop',
+    image: expPemateriBp,
     description: 'Mengajar mahasiswa baru mengenai algoritma dasar, logika pemrograman Java, dan sesi live coding interaktif untuk mempermudah pemahaman fundamental software development.',
     tags: ['Java', 'Algorithm', 'Public Speaking', 'Code Review']
   }
 ];
 
-// All Updated Achievements (Including Technotainment & ITFEST 2026)
+// All Updated Achievements Ordered: Newest Year First, Highest Rank First
 const achievements = [
   {
     year: '2026',
     title: 'Juara 1 UI/UX Design',
-    event: 'ISOFEST 2026 Nasional',
-    description: 'Meraih peringkat pertama dalam kompetisi UI/UX nasional melalui solusi desain aplikasi inovatif dengan metodologi Design Thinking & validasi user yang komprehensif.'
-  },
-  {
-    year: '2026',
-    title: 'GrandFinalis UI/UX Designer',
-    event: 'Technotainment 2026 Nasional',
-    description: 'Berhasil melaju sebagai Grand Finalis pada cabang lomba UI/UX Designer melalui perancangan solusi produk digital yang inovatif dan berorientasi pada kebutuhan pengguna.'
+    event: 'ISOFEST 2026',
+    organizer: 'HMIF Telkom University Surabaya',
+    team: 'Tim TwinTower',
+    image: certIsofest,
+    description: 'Meraih Juara 1 dalam Lomba UI/UX Informatika Sports & Festival (ISOFEST) melalui perancangan aplikasi inovatif dengan penerapan metodologi Design Thinking dan validasi kebutuhan pengguna yang komprehensif.'
   },
   {
     year: '2026',
     title: 'Juara 3 UI/UX Design',
     event: 'International Hackfest 2026',
-    description: 'Berhasil meraih Juara 3 pada ajang kompetisi internasional dengan menyajikan purwarupa digital yang fokus pada aksesibilitas dan kemudahan penggunaan pengguna.'
+    organizer: 'Universitas Ciputra Surabaya',
+    team: 'Tim Preketek',
+    image: certHackfest,
+    description: 'Meraih 3rd Place Winner pada kompetisi internasional Hackfest: International UI/UX Competition 2026 dengan menyajikan solusi rancangan purwarupa digital yang fokus pada aksesibilitas dan user experience.'
+  },
+  {
+    year: '2026',
+    title: 'GrandFinalis UI/UX Designer',
+    event: 'Technotainment 2026',
+    organizer: 'UKMFT-ITC Universitas Trunojoyo Madura',
+    team: 'Tim Preketek',
+    image: certTechno,
+    description: 'Berhasil lolos sebagai Grand Finalis pada kompetisi Technotainment 2026 cabang UI/UX Designer dengan tema "Integrating Technology and Creativity for Innovative Excellence" melalui perancangan solusi produk digital yang inovatif.'
   },
   {
     year: '2026',
     title: 'Finalis Web Development',
     event: 'ITFEST 2026 Nasional',
+    organizer: 'Kompetisi Rekayasa Web Nasional',
+    team: 'Web Development Division',
+    image: null,
     description: 'Meraih predikat Finalis dalam kompetisi rekayasa web nasional berkat pengembangan aplikasi web modern yang responsif, terstruktur, dan berkinerja tinggi.'
   },
   {
     year: '2025',
     title: 'Finalis Kontes Kapal Indonesia',
     event: 'KKI 2025 Puspresnas',
+    organizer: 'Pusat Prestasi Nasional (Kemendikbudristek)',
+    team: 'Electrical Remote Control',
+    image: null,
     description: 'Menjadi finalis divisi Electrical Remote Control tingkat nasional dan berkontribusi aktif dalam perancangan desain konsep serta integrasi sistem kapal robotik.'
   }
 ];
