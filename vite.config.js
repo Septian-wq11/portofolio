@@ -1,16 +1,13 @@
 import { defineConfig } from 'vite';
 import tailwindcss from '@tailwindcss/vite';
 import vue from '@vitejs/plugin-vue';
-import laravel from 'laravel-vite-plugin';
 import { fileURLToPath, URL } from 'node:url';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+    base: './',
+    publicDir: 'public',
     plugins: [
-        laravel({
-            input: ['resources/css/app.css', 'resources/js/app.js'],
-            refresh: true,
-        }),
         tailwindcss(),
         vue({
             template: {
@@ -27,5 +24,9 @@ export default defineConfig({
             '@': fileURLToPath(new URL('./resources/js', import.meta.url)),
         },
     },
+    build: {
+        outDir: 'dist',
+        emptyOutDir: true,
+    }
 });
 
