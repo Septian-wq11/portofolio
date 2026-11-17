@@ -113,9 +113,9 @@
               </div>
             </div>
 
-            <!-- Exact Bio from Previous Portfolio -->
+            <!-- Professional Bio -->
             <p class="text-xs sm:text-[13px] text-zinc-300 font-normal leading-relaxed max-w-md mx-auto lg:mx-0 drop-shadow-sm">
-              Mahasiswa Sistem Informasi UPN Veteran Jawa Timur berprestasi nasional yang berfokus membangun produk digital yang intuitif, estetik, dan berorientasi solusi bisnis nyata melalui pendekatan <strong class="text-white font-semibold">Design Thinking</strong> dan rekayasa web modern.
+              Information Systems student at UPN "Veteran" East Java with a strong interest in UI/UX Design and digital product development. Experienced in designing user-centered digital solutions through user research, wireframing, prototyping, and usability testing. Skilled in Figma and familiar with web development, system analysis, and quality assurance. Passionate about creating intuitive and impactful digital experiences.
             </p>
 
             <!-- Availability & Location Indicator (Clean editorial style without AI-slop status dot) -->
