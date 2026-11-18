@@ -1157,6 +1157,7 @@ import profileImg from '/public/FotoProfile.png?url';
 import certTechno from '/public/certificates/grandfinalis-technotainment.jpg?url';
 import certHackfest from '/public/certificates/juara3-hackfest.jpg?url';
 import certIsofest from '/public/certificates/juara1-isofest.jpg?url';
+import certItfest from '/public/certificates/finalis-itfest.jpg?url';
 
 import expWakilHr from '/public/experience/wakil-hr-vrt.jpg?url';
 import expPemateriBp from '/public/experience/pemateri-bp.jpg?url';
@@ -1433,11 +1434,11 @@ const achievements = [
   {
     year: '2026',
     title: 'Finalis Web Development',
-    event: 'ITFEST 2026 Nasional',
-    organizer: 'Kompetisi Rekayasa Web Nasional',
-    team: 'Web Development Division',
-    image: null,
-    description: 'Meraih predikat Finalis dalam kompetisi rekayasa web nasional berkat pengembangan aplikasi web modern yang responsif, terstruktur, dan berkinerja tinggi.'
+    event: 'IT Fest 2026',
+    organizer: 'HIMAPRO-TI Universitas Muria Kudus',
+    team: 'Tim Bismillah Gacor',
+    image: certItfest,
+    description: 'Meraih predikat Finalis pada Web Development Competition IT Fest 2026 dengan tema "Inovasi Digital dalam Pelayanan Publik Berskala Besar" melalui pengembangan aplikasi web modern yang responsif dan berkinerja tinggi.'
   },
   {
     year: '2025',
